@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7184457521053193093}
   - component: {fileID: 6060589016603778080}
   - component: {fileID: 8358538866354661610}
+  - component: {fileID: -7251647739906574041}
   m_Layer: 0
-  m_Name: WaterDrop
+  m_Name: PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,3 +82,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7251647739906574041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565909524674119999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dd99fb3e1c8c947a2b87b55b3179de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _min: {x: 1, y: 1, z: 1}
+  _max: {x: 1.1, y: 1.1, z: 1.1}
+  _speed: 1
