@@ -12,7 +12,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _horizontalBoundary;
     [SerializeField] private float _startOffset;
 
-    public event UnityAction Finished;
+    public event UnityAction RoadEnded;
 
     private float _distanceTraveled;
     private float _horizontalPosition;
@@ -53,7 +53,7 @@ public class PlayerMover : MonoBehaviour
         if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 3).x && _onFinish == false)
         {
             _onFinish = true;
-            Finished?.Invoke();
+            RoadEnded?.Invoke();
         }
     }
 }
