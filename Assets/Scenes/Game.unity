@@ -18,8 +18,8 @@ RenderSettings:
   m_FogColor: {r: 0.26664296, g: 0.4366523, b: 0.5283019, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.03
-  m_LinearFogStart: 5
-  m_LinearFogEnd: 30
+  m_LinearFogStart: 20
+  m_LinearFogEnd: 25
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -1127,8 +1127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetPosition: {x: 26, y: 3, z: 4}
   _targetRotation: {x: 35, y: 140, z: 0}
-  _delay: 2
-  _speed: 0.015
+  _delay: 1.5
+  _speed: 0.02
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
