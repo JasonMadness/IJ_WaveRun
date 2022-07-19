@@ -49,8 +49,8 @@ public class PlayerMover : MonoBehaviour
             ClampHorizontalPosition();
             Rotate();
         }
-
-        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 2).x && _onFinish == false)
+        
+        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 3).x && _onFinish == false)
         {
             _onFinish = true;
             Finished?.Invoke();
