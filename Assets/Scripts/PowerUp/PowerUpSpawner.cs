@@ -7,7 +7,7 @@ public class PowerUpSpawner : MonoBehaviour
     [SerializeField] private List<SpawnPoint> _spawnPoints;
     [SerializeField] private PowerUp _prefab;
     [SerializeField] private Transform _container;
-    [SerializeField] private int _interval;
+    [SerializeField] private float _interval;
 
     private void Start()
     {

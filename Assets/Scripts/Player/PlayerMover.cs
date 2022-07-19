@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using UnityEngine.Events;
 
 public class PlayerMover : MonoBehaviour
 {
@@ -11,45 +12,48 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _horizontalBoundary;
     [SerializeField] private float _startOffset;
 
-    private float distanceTraveled;
-    private float horizontalPosition;
-    private bool onFinish = false;
+    public event UnityAction Finished;
+
+    private float _distanceTraveled;
+    private float _horizontalPosition;
+    private bool _onFinish = false;
 
     private void Start()
     {
-        distanceTraveled += _startOffset;
+        _distanceTraveled += _startOffset;
     }
 
     private void Move()
     {
-        Vector3 moveDirection = _pathCreator.path.GetPointAtDistance(distanceTraveled);
-        horizontalPosition -= Input.GetAxis("Horizontal") * Time.deltaTime;
-        transform.position = new Vector3(moveDirection.x, moveDirection.y, horizontalPosition);
+        Vector3 moveDirection = _pathCreator.path.GetPointAtDistance(_distanceTraveled);
+        _horizontalPosition -= Input.GetAxis("Horizontal") * Time.deltaTime;
+        transform.position = new Vector3(moveDirection.x, moveDirection.y, _horizontalPosition);
     }
 
     private void ClampHorizontalPosition()
     {
-        horizontalPosition = Mathf.Clamp(horizontalPosition, -_horizontalBoundary, _horizontalBoundary);
+        _horizontalPosition = Mathf.Clamp(_horizontalPosition, -_horizontalBoundary, _horizontalBoundary);
     }
 
     private void Rotate()
     {
-        transform.rotation = _pathCreator.path.GetRotationAtDistance(distanceTraveled) * Quaternion.Euler(_rotationOffset);
+        transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTraveled) * Quaternion.Euler(_rotationOffset);
     }
 
     private void Update()
     {
-        if (onFinish == false)
+        if (_onFinish == false)
         {
-            distanceTraveled += _speed * Time.deltaTime;
+            _distanceTraveled += _speed * Time.deltaTime;
             Move();
             ClampHorizontalPosition();
             Rotate();
         }
 
-        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 2).x)
+        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 2).x && _onFinish == false)
         {
-            onFinish = true;
+            _onFinish = true;
+            Finished?.Invoke();
         }
     }
 }
