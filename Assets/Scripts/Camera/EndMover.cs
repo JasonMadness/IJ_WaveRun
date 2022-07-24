@@ -28,5 +28,7 @@ public class EndMover : MonoBehaviour
             interpolateValue += Time.deltaTime * _speed;
             yield return new WaitForEndOfFrame();
         }
+        
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

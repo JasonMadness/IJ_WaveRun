@@ -4,6 +4,7 @@ using UnityEngine;
 using PathCreation;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(EndMover))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private PathCreator _pathCreator;
@@ -54,6 +55,7 @@ public class PlayerMover : MonoBehaviour
         {
             _onFinish = true;
             RoadEnded?.Invoke();
+            GetComponent<EndMover>().enabled = true;
         }
     }
 }

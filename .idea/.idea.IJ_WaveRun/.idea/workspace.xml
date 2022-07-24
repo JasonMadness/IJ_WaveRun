@@ -22,7 +22,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="rider.run.widget.enabled.cache" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -58,6 +58,7 @@
       <workItem from="1658240679293" duration="8096000" />
       <workItem from="1658417909451" duration="1820000" />
       <workItem from="1658424829404" duration="1982000" />
+      <workItem from="1658652950479" duration="4736000" />
     </task>
     <servers />
   </component>
