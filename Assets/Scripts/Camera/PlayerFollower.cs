@@ -8,13 +8,12 @@ public class PlayerFollower : MonoBehaviour
     [SerializeField] private CameraOffset _start;
     [SerializeField] private CameraOffset _end;
     [SerializeField] private Player _player;
-    [SerializeField] private Vector3 _mainOffset;
-    [SerializeField] private Vector3 _endingOffset;
-    [SerializeField] private Vector3 _endingRotation;
     [SerializeField] private float _endingDelay;
     [SerializeField] private float _speed;
 
     private Vector3 _offset;
+    private Vector3 _endingOffset;
+    private Vector3 _endingRotation;
 
     private void OnEnable()
     {
@@ -48,7 +47,10 @@ public class PlayerFollower : MonoBehaviour
 
     private void Start()
     {
-        _offset = _mainOffset;
+        _offset = _start.Position;
+        transform.rotation = Quaternion.Euler(_start.Rotation);
+        _endingOffset = _end.Position;
+        _endingRotation = _end.Rotation;
     }
 
     private void LateUpdate()

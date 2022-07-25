@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heigth: 0.15
+  _splash: {fileID: 5869965029999562094, guid: 00358ef6a2c245c409629a52f50b7f6f, type: 3}
 --- !u!135 &3933869920498748799
 SphereCollider:
   m_ObjectHideFlags: 0

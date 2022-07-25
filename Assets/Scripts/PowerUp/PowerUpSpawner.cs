@@ -7,6 +7,7 @@ public class PowerUpSpawner : MonoBehaviour
     [SerializeField] private List<SpawnPoint> _spawnPoints;
     [SerializeField] private PowerUp _prefab;
     [SerializeField] private Transform _container;
+    [SerializeField] private Transform _particlesContainer;
     [SerializeField] private float _interval;
     [SerializeField] private Player _player;
 
@@ -23,6 +24,7 @@ public class PowerUpSpawner : MonoBehaviour
             {
                 PowerUp powerUp = Instantiate(_prefab);
                 powerUp.transform.parent = _point.transform;
+                powerUp.Init(_particlesContainer);
                 float xPosition = _point.transform.position.x + _interval * i;
                 powerUp.transform.position = new Vector3(xPosition, _point.transform.position.y, _point.transform.position.z);
                 powerUp.PickedUp += _player.OnPowerUpPicked;

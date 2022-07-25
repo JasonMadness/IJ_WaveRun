@@ -7,12 +7,20 @@ using UnityEngine.Events;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _heigth;
+    [SerializeField] private ParticleSystem _splash;
+    
+    private Transform _particlesContainer;
 
     public event UnityAction<PowerUp> PickedUp;
 
     private void Start()
     {
         DropToGround();
+    }
+
+    public void Init(Transform particlesContainer)
+    {
+        _particlesContainer = particlesContainer;
     }
 
     private void DropToGround()
@@ -25,6 +33,9 @@ public class PowerUp : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         PickedUp?.Invoke(this);
+        ParticleSystem splash = Instantiate(_splash, transform.position, transform.rotation);
+        splash.transform.SetParent(_particlesContainer);
+        Destroy(splash.gameObject, 2f);
         Destroy(gameObject);
     }
 }
