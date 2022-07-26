@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dd99fb3e1c8c947a2b87b55b3179de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _min: {x: 1, y: 1, z: 1}
-  _max: {x: 1.1, y: 1.1, z: 1.1}
+  _min: {x: 1.2, y: 1.2, z: 1.2}
+  _max: {x: 1.3, y: 1.3, z: 1.3}
   _speed: 1
 --- !u!114 &6567564017389612506
 MonoBehaviour:

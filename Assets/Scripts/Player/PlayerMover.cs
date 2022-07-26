@@ -36,10 +36,10 @@ public class PlayerMover : MonoBehaviour
         _horizontalPosition = Mathf.Clamp(_horizontalPosition, -_horizontalBoundary, _horizontalBoundary);
     }
 
-    private void Rotate()
+    /*private void Rotate()
     {
         transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTraveled) * Quaternion.Euler(_rotationOffset);
-    }
+    }*/
 
     private void Update()
     {
@@ -48,7 +48,6 @@ public class PlayerMover : MonoBehaviour
             _distanceTraveled += _speed * Time.deltaTime;
             Move();
             ClampHorizontalPosition();
-            //Rotate();
         }
         
         if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 3).x && _onFinish == false)

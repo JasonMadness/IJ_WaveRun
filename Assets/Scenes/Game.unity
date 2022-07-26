@@ -2088,8 +2088,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _start:
-    Position: {x: -3, y: 2, z: -1.3}
-    Rotation: {x: 20, y: 66, z: 0}
+    Position: {x: -2, y: 1.5, z: -1}
+    Rotation: {x: 20, y: 70, z: 0}
   _end:
     Position: {x: -1.5, y: 4, z: 3}
     Rotation: {x: 40, y: 140, z: 0}
@@ -2922,7 +2922,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1469376129
 BoxCollider:
@@ -2949,7 +2949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7ddd1399a2d8c4cb52af675fb396be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleUpgrade: {x: 0.015, y: 0.015, z: 0.015}
+  _scaleUpgrade: {x: 0.025, y: 0.025, z: 0.025}
   _scaleUpdateSpeed: 0.2
 --- !u!114 &1469376131
 MonoBehaviour:
@@ -2980,7 +2980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: 943ac4bb5ec024243a7155e3317ddecf, type: 2}
-  _offset: {x: -0.003, y: 0.002}
+  _offset: {x: -0.006, y: 0.003}
 --- !u!1001 &1484234902
 PrefabInstance:
   m_ObjectHideFlags: 0
