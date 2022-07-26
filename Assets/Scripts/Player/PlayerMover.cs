@@ -48,7 +48,7 @@ public class PlayerMover : MonoBehaviour
             _distanceTraveled += _speed * Time.deltaTime;
             Move();
             ClampHorizontalPosition();
-            Rotate();
+            //Rotate();
         }
         
         if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 3).x && _onFinish == false)
