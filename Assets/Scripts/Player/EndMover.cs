@@ -9,9 +9,12 @@ public class EndMover : MonoBehaviour
     [SerializeField] private Vector3 _targetRotation;
     [SerializeField] private float _delay;
     [SerializeField] private float _speed;
+    
+    private Vector3 _startPosition;
 
     private void Start()
     {
+        _startPosition = transform.position;
         StartCoroutine(MoveToTargetPosition());
     }
 
@@ -22,9 +25,9 @@ public class EndMover : MonoBehaviour
 
         while (interpolateValue < 1)
         {
-            transform.position = Vector3.Lerp(transform.position, _targetPosition, interpolateValue);
-            transform.rotation =
-                Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetRotation), interpolateValue);
+            transform.position = Vector3.Lerp(_startPosition, _targetPosition, interpolateValue);
+            //transform.rotation =
+             //   Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetRotation), interpolateValue);
             interpolateValue += Time.deltaTime * _speed;
             yield return new WaitForEndOfFrame();
         }
