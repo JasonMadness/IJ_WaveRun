@@ -32,8 +32,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _DepthDensity: 0.5
-    - _DistanceDensity: 0.025
+    - _DepthDensity: 1
+    - _DistanceDensity: 1
     - _EdgeFoamDepth: 0.25
     - _FancyShadows: 1
     - _FoamContribution: 0.549
@@ -58,7 +58,7 @@ Material:
     - _Wave2Speed: 1
     - _Wave2Wavelength: 10
     - _WaveNormalDelta: 0.01
-    - _WaveNormalScale: 20
+    - _WaveNormalScale: 100
     - _WaveNormalSpeed: 0.05
     m_Colors:
     - _DeepColor: {r: 0, g: 0.012465047, b: 0.122641504, a: 1}
@@ -69,3 +69,4 @@ Material:
     - _ShallowColor: {r: 0.44313726, g: 0.9137255, b: 0.6627451, a: 1}
     - _SparkleColor: {r: 0.54901963, g: 0.9607843, b: 0.8156863, a: 1}
     - _SunSpecularColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

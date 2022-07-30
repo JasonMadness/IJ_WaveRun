@@ -66,7 +66,7 @@ Material:
     - _FarColor: {r: 0.08343716, g: 0.29864755, b: 0.7075472, a: 1}
     - _SSSColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.03551086, g: 0.30351532, b: 0.3584906, a: 1}
-    - _ShallowColor: {r: 0.022011492, g: 0.19140635, b: 1.5554817, a: 1}
+    - _ShallowColor: {r: 0.32314324, g: 0.37626222, b: 0.9473069, a: 1}
     - _SparkleColor: {r: 0.740566, g: 1, b: 0.9357789, a: 1}
     - _SunSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -4,20 +4,28 @@ using UnityEngine;
 using PathCreation;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(EndMover))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private PathCreator _pathCreator;
     [SerializeField] private float _speed;
-    [SerializeField] private Vector3 _rotationOffset;
     [SerializeField] private float _horizontalBoundary;
     [SerializeField] private float _startOffset;
+    [SerializeField] private float _delayBeforeEnd;
+    [SerializeField] private Vector3 _endPosition;
+
+    private Rigidbody _rigidbody;
+    private float _distanceTraveled;
+    private float _endSpeedCoefficient = 20;
+    private float _horizontalPosition;
+    private bool _onFinish = false;
 
     public event UnityAction RoadEnded;
 
-    private float _distanceTraveled;
-    private float _horizontalPosition;
-    private bool _onFinish = false;
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Start()
     {
@@ -26,6 +34,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
+        _distanceTraveled += _speed * Time.deltaTime;
         Vector3 moveDirection = _pathCreator.path.GetPointAtDistance(_distanceTraveled);
         _horizontalPosition -= Input.GetAxis("Horizontal") * Time.deltaTime;
         transform.position = new Vector3(moveDirection.x, moveDirection.y, _horizontalPosition);
@@ -36,25 +45,36 @@ public class PlayerMover : MonoBehaviour
         _horizontalPosition = Mathf.Clamp(_horizontalPosition, -_horizontalBoundary, _horizontalBoundary);
     }
 
-    /*private void Rotate()
+    private IEnumerator MoveToEnd()
     {
-        transform.rotation = _pathCreator.path.GetRotationAtDistance(_distanceTraveled) * Quaternion.Euler(_rotationOffset);
-    }*/
+        yield return new WaitForSeconds(_delayBeforeEnd);
+        float interpolateValue = 0;
+        Vector3 position = transform.position;
+
+        while (interpolateValue < 1)
+        {
+            transform.position = Vector3.Lerp(position, _endPosition, interpolateValue);
+            interpolateValue += Time.deltaTime * _speed / _endSpeedCoefficient;
+            yield return new WaitForEndOfFrame();
+        }
+
+        _rigidbody.velocity = Vector3.zero;
+    }
 
     private void Update()
     {
         if (_onFinish == false)
         {
-            _distanceTraveled += _speed * Time.deltaTime;
             Move();
             ClampHorizontalPosition();
         }
-        
-        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 3).x && _onFinish == false)
+
+        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 2).x && _onFinish == false)
         {
             _onFinish = true;
             RoadEnded?.Invoke();
-            GetComponent<EndMover>().enabled = true;
+            _rigidbody.velocity = Vector3.zero;
+            StartCoroutine(MoveToEnd());
         }
     }
 }

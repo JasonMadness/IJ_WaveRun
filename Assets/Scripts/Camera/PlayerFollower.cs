@@ -55,6 +55,8 @@ public class PlayerFollower : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = _player.transform.position + _offset;
+        Vector3 position = _player.transform.position;
+        position.z = _offset.z;
+        transform.position = position + _offset;
     }
 }

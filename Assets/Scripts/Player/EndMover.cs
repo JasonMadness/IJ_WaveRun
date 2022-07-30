@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EndMover : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class EndMover : MonoBehaviour
     
     private Vector3 _startPosition;
 
-    private void Start()
+    public event UnityAction Ended;
+
+    private void OnEnable()
     {
         _startPosition = transform.position;
         StartCoroutine(MoveToTargetPosition());
@@ -26,12 +29,10 @@ public class EndMover : MonoBehaviour
         while (interpolateValue < 1)
         {
             transform.position = Vector3.Lerp(_startPosition, _targetPosition, interpolateValue);
-            //transform.rotation =
-             //   Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetRotation), interpolateValue);
             interpolateValue += Time.deltaTime * _speed;
             yield return new WaitForEndOfFrame();
         }
-        
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        Ended?.Invoke();
     }
 }

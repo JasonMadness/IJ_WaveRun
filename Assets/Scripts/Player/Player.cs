@@ -6,19 +6,22 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(PlayerScaler))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Vector3 _scaleUpgrade;
-    [SerializeField] private float _scaleUpdateSpeed;
+    //[SerializeField] private Vector3 _scaleUpgrade;
+    //[SerializeField] private float _scaleUpdateSpeed;
 
     private PlayerMover _playerMover;
-    private Vector3 _targetScale;
+    private PlayerScaler _playerScaler;
+    //private Vector3 _targetScale;
 
     public event UnityAction Finished;
 
     private void Awake()
     {
         _playerMover = GetComponent<PlayerMover>();
+        _playerScaler = GetComponent<PlayerScaler>();
         _playerMover.RoadEnded += OnRoadEnded;
     }
 
@@ -30,21 +33,22 @@ public class Player : MonoBehaviour
     private void OnRoadEnded()
     {
         Finished?.Invoke();
+        _playerScaler.IncreaseAtEnd();
     }
 
-    private void Start()
-    {
-        _targetScale = transform.localScale;
-    }
+    //private void Start()
+    //{
+    //    _targetScale = transform.localScale;
+    //}
 
     public void OnPowerUpPicked(PowerUp powerUp)
     {
-        _targetScale += _scaleUpgrade;
+        _playerScaler.IncreaseAllAxis();
         powerUp.PickedUp -= OnPowerUpPicked;
     }
 
-    private void Update()
-    {
-        transform.localScale = Vector3.MoveTowards(transform.localScale, _targetScale, _scaleUpdateSpeed * Time.deltaTime);
-    }
+    //private void Update()
+    //{
+    //    transform.localScale = Vector3.MoveTowards(transform.localScale, _targetScale, _scaleUpdateSpeed * Time.deltaTime);
+    //}
 }
