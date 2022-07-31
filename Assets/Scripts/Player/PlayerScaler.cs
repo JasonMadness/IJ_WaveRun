@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerScaler : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerScaler : MonoBehaviour
 
     private Vector3 _targetScale;
     private bool _roadEnded = false;
+
+    public event UnityAction<int> Scaled;
 
     private void Start()
     {
@@ -40,8 +43,11 @@ public class PlayerScaler : MonoBehaviour
         {
             scale += _endScaleUpgrade;
             transform.localScale = scale;
+            Scaled?.Invoke(i + 1);
             yield return delay;
         }
+
+        Scaled?.Invoke(0);
     }
 
     private void Update()

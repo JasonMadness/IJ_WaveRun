@@ -9,12 +9,8 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(PlayerScaler))]
 public class Player : MonoBehaviour
 {
-    //[SerializeField] private Vector3 _scaleUpgrade;
-    //[SerializeField] private float _scaleUpdateSpeed;
-
     private PlayerMover _playerMover;
     private PlayerScaler _playerScaler;
-    //private Vector3 _targetScale;
 
     public event UnityAction Finished;
 
@@ -22,6 +18,10 @@ public class Player : MonoBehaviour
     {
         _playerMover = GetComponent<PlayerMover>();
         _playerScaler = GetComponent<PlayerScaler>();
+    }
+
+    private void OnEnable()
+    {
         _playerMover.RoadEnded += OnRoadEnded;
     }
 
@@ -36,19 +36,9 @@ public class Player : MonoBehaviour
         _playerScaler.IncreaseAtEnd();
     }
 
-    //private void Start()
-    //{
-    //    _targetScale = transform.localScale;
-    //}
-
     public void OnPowerUpPicked(PowerUp powerUp)
     {
         _playerScaler.IncreaseAllAxis();
         powerUp.PickedUp -= OnPowerUpPicked;
     }
-
-    //private void Update()
-    //{
-    //    transform.localScale = Vector3.MoveTowards(transform.localScale, _targetScale, _scaleUpdateSpeed * Time.deltaTime);
-    //}
 }
