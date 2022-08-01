@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
+    [SerializeField] private float _explosionForce;
+    [SerializeField] private float _destroyDelay;
+
     private Rigidbody[] _pieces;
 
     private void Start()
@@ -12,23 +15,17 @@ public class Boat : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<Boat>(out _))
-        {
-            Debug.Log("!");
-            Destroy(gameObject);
-        }
-
         if (collision.gameObject.TryGetComponent<Player>(out _))
         {
             gameObject.GetComponent<Collider>().enabled = false;
-            
+
             foreach (Rigidbody piece in _pieces)
             {
                 piece.useGravity = true;
-                piece.AddForce((Vector3.up + Random.insideUnitSphere) * 3, ForceMode.Impulse);
+                piece.AddForce((Vector3.up + Random.insideUnitSphere) * _explosionForce, ForceMode.Impulse);
             }
 
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, _destroyDelay);
         }
     }
 }

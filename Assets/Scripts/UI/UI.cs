@@ -10,7 +10,7 @@ public class UI : MonoBehaviour
     [SerializeField] private Text _waveText;
     [SerializeField] private Slider _waveSlider;
     [SerializeField] private Image _sliderFill;
-    [SerializeField] private Player _player;
+    [SerializeField] private PlayerMover _playerMover;
     [SerializeField] private PlayerScaler _playerScaler;
     [SerializeField] private TMP_Text _coefficient;
     [SerializeField] private Color[] _color;
@@ -28,11 +28,13 @@ public class UI : MonoBehaviour
     private void OnEnable()
     {
         _playerScaler.Scaled += OnPlayerScaled;
+        _playerMover.RoadEnded += OnRoadEnded;
     }
 
     private void OnDisable()
     {
         _playerScaler.Scaled -= OnPlayerScaled;
+        _playerMover.RoadEnded -= OnRoadEnded;
     }
 
     public void IncreaseSliderValue()
@@ -74,6 +76,11 @@ public class UI : MonoBehaviour
         {
             _coefficient.text = string.Empty;
         }
+    }
+
+    public void OnRoadEnded()
+    {
+        _ending.ShowEndingPanel();
     }
 
     public void OnPowerUpPicked(PowerUp powerUp)
