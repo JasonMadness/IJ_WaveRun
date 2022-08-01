@@ -7,10 +7,12 @@ using UnityEngine.Serialization;
 
 [RequireComponent(typeof(PlayerMover))]
 [RequireComponent(typeof(PlayerScaler))]
+[RequireComponent(typeof(WaterDrawer))]
 public class Player : MonoBehaviour
 {
     private PlayerMover _playerMover;
     private PlayerScaler _playerScaler;
+    private WaterDrawer _waterDrawer;
 
     public event UnityAction Finished;
 
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     {
         _playerMover = GetComponent<PlayerMover>();
         _playerScaler = GetComponent<PlayerScaler>();
+        _waterDrawer = GetComponent<WaterDrawer>();
     }
 
     private void OnEnable()
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     {
         Finished?.Invoke();
         _playerScaler.IncreaseAtEnd();
+        _waterDrawer.SetStartPosition(transform.position);
     }
 
     public void OnPowerUpPicked(PowerUp powerUp)

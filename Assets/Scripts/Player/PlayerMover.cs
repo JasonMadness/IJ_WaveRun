@@ -4,28 +4,22 @@ using UnityEngine;
 using PathCreation;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private PathCreator _pathCreator;
     [SerializeField] private float _speed;
     [SerializeField] private float _horizontalBoundary;
     [SerializeField] private float _startOffset;
+    [SerializeField] private int _endOffset;
     [SerializeField] private float _delayBeforeEnd;
     [SerializeField] private Vector3 _endPosition;
 
-    private Rigidbody _rigidbody;
     private float _distanceTraveled;
     private float _endSpeedCoefficient = 20;
     private float _horizontalPosition;
     private bool _onFinish = false;
 
     public event UnityAction RoadEnded;
-
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-    }
 
     private void Start()
     {
@@ -57,8 +51,6 @@ public class PlayerMover : MonoBehaviour
             interpolateValue += Time.deltaTime * _speed / _endSpeedCoefficient;
             yield return new WaitForEndOfFrame();
         }
-
-        _rigidbody.velocity = Vector3.zero;
     }
 
     private void Update()
@@ -69,11 +61,10 @@ public class PlayerMover : MonoBehaviour
             ClampHorizontalPosition();
         }
 
-        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - 2).x && _onFinish == false)
+        if (transform.position.x >= _pathCreator.path.GetPoint(_pathCreator.path.NumPoints - _endOffset).x && _onFinish == false)
         {
             _onFinish = true;
             RoadEnded?.Invoke();
-            _rigidbody.velocity = Vector3.zero;
             StartCoroutine(MoveToEnd());
         }
     }
